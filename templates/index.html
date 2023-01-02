@@ -1,0 +1,52 @@
+{% include "header.html" %}
+<div class="box" id="heading">
+  <h1>Select a file to upload </h1>
+</div>
+
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+
+<div class="picture">
+{% if file_name %}
+	<div>
+		<img class="original" src="{{ url_for('static', filename='uploads/' + file_name) }}">
+	</div>
+{% endif %}
+</div>
+
+<div class="picture">
+{% if output_path %}
+	<div>
+		<img class="output" src="{{ output_path }}">
+	</div>
+{% endif %}
+</div>
+
+<div class="box">
+  <form method="post" action="/" enctype="multipart/form-data">
+  <p>
+    <input type="file" name="file" autocomplete="off" required>
+  </p>
+
+  <p>
+    <label>Number of Color: </label>
+    <input type="number" name="color_number" autocomplete="off">
+  </p>
+
+  <p>
+    <button type="submit" class="btn btn-dark"> Upload </button>
+  </p>
+  </form>
+</div>
+
+
+{% include "footer.html" %}
